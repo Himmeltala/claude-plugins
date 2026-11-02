@@ -1,8 +1,0 @@
-export { plugin as bugTracing } from "../plugins/bug-tracing/opencode/index.js"
-export { plugin as chineseWriting } from "../plugins/chinese-writing/opencode/index.js"
-export { plugin as codeShaping } from "../plugins/code-shaping/opencode/index.js"
-export { plugin as codeTesting } from "../plugins/code-testing/opencode/index.js"
-export { plugin as commentTrimming } from "../plugins/comment-trimming/opencode/index.js"
-export { plugin as commitGuarding } from "../plugins/commit-guarding/opencode/index.js"
-export { plugin as inputGuard } from "../plugins/input-guard/opencode/index.js"
-export { plugin as outputGuard } from "../plugins/output-guard/opencode/index.js"

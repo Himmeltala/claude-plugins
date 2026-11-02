@@ -80,21 +80,6 @@ dshmarket 的列表只读 awesome-dsh-plugin 的目录，收录要向上游提 P
 
 改动后跑 `node scripts/check-plugins.mjs`，它校验版本一致、包名、技能数量与提交闸门。
 
-### opencode
-
-opencode 不读插件市场与 `hooks.json`，也不加载 DSH 的 `lib/`。每个插件的 `opencode/index.js` 是独立适配层：`config` 钩子把 `skills/` 注册进 `cfg.skills.paths`，`comment-trimming` 顺带注册子代理，`commit-guarding` 在 `tool.execute.before` 复跑同一批闸门脚本。
-
-本机安装：
-
-```bash
-node scripts/install-opencode.mjs
-```
-
-脚本只在 `~/.config/opencode/plugins/` 下建一个指向 `opencode/index.js` 的软链，不改 opencode 配置，也不动 Claude 与 DSH 的目录。重启 opencode 生效，`opencode debug skill` 可确认 13 个技能已列出。
-
-只装部分插件时，把该插件的 `opencode/index.js` 单独链过去即可；仓库根下的 `opencode/index.js` 是八个插件的聚合入口。
-
-
 ## 使用
 
 技能多数会自动触发，不必记命令。各插件的显式调用路径、触发词与适用范围，写在各插件目录下的 README 里。
