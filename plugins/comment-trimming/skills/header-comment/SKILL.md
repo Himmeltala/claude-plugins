@@ -9,7 +9,7 @@ allowed-tools: [Read, Edit, Write, Grep, Glob, Bash]
 
 ## JS、CSS、HTML、Vue
 
-文件头统一使用下面这块注释：
+文件头统一使用下面这块注释。`<!-- -->` 是 `.html` 与 `.vue` 的写法；`.js` 与 `.css` 用 `/* ... */` 包同一套六字段，内容不变：
 
 ```html
 <!--
