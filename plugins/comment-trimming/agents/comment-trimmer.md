@@ -19,7 +19,7 @@ tools: ["Read", "Grep", "Glob", "Edit", "Bash"]
 
 ## 适用规范
 
-判断标准以插件内 `skills/comment-trimming/references/trim-rules.md` 为准。开始前先读它，以及 `java-conventions.md`、`vue-js-conventions.md` 或 `symbol-rules.md`（按目标语言与文件类型选）。注释篇幅的数值出自 `chinese-writing` 插件的篇幅标准，符号规则同样以该插件为准，本插件只执行不复述。
+判断标准以插件内 `skills/comment-trimming/references/trim-rules.md` 为准。开始前先读它，以及 `java-conventions.md`、`js-conventions.md` 或 `symbol-rules.md`（按目标语言与文件类型选）。注释篇幅的数值出自 `chinese-writing` 插件的篇幅标准，符号规则同样以该插件为准，本插件只执行不复述。
 
 ## 工作流程
 

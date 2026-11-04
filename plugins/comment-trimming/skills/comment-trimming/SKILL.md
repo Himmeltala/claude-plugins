@@ -42,7 +42,7 @@ allowed-tools: [Read, Edit, Write, Grep, Glob, Bash]
 各语言的具体模板、正反例、实测统计见引用文件，**不要凭印象发挥**：
 
 - `references/java-conventions.md`——字段 `@ApiModelProperty`、方法 `@ApiOperation`、行内注释取舍（类头 Javadoc 见 `header-comment` 技能）
-- `references/vue-js-conventions.md`——Vue 与 JS 的轻注释做法
+- `references/js-conventions.md`——单行注释与函数 JSDoc 的做法
 - `references/symbol-rules.md`——注释符号禁止清单与两个规则缺陷
 
 **关键**：Java 字段用 `@ApiModelProperty`，**控制层**方法用 `@ApiOperation`。Service 内部方法与私有方法不加注解、也不补 Javadoc。不要把这些统一改成 Javadoc——团队存量代码统一是 Swagger 注解那套，新代码必须一致。
@@ -78,7 +78,7 @@ allowed-tools: [Read, Edit, Write, Grep, Glob, Bash]
 ## 附加资源
 
 - `references/java-conventions.md`
-- `references/vue-js-conventions.md`
+- `references/js-conventions.md`
 - `references/symbol-rules.md`
 - `references/trim-rules.md`——删什么、留什么、边界判断（裁剪的权威文件）
 

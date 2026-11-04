@@ -1,7 +1,5 @@
 # Java 注释做法
 
-以下是**团队标准**，对所有 Java 项目生效，不限某个仓库。样例取自存量代码，不是通用社区建议——写新代码时对齐这些形态，别引入外部风格。
-
 类头 Javadoc 见 `header-comment` 技能，本文只讲类内部的注释。
 
 ## 字段
@@ -27,7 +25,7 @@ public JsonResult<PageResult<RemindMessage>> page(RemindMessageQuery query) {
 - Service 内部方法、私有方法不加注解，也不写 Javadoc。方法名和签名能说明的事不必再写一遍。
 - 不要为了"看起来很规范"给每个方法补 Javadoc——那是噪音，且与存量风格冲突。
 
-## 行内注释：只讲"为什么"，一句写完
+## 行内注释
 
 真实好例：
 

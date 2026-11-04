@@ -1,6 +1,6 @@
 {
   "name": "comment-trimming",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "团队注释规范：稀疏优先，默认可不写；注释篇幅以 chinese-writing 插件的篇幅标准为准；注释只讲本段代码、不记调用链、不复述实现细节；禁 emoji 与装饰分割线；编辑某个文件时顺手把该文件整文件清干净，另配 comment-trimmer 子代理做整目录的存量批量清理。header-comment 技能管 Java 类头 Javadoc，以及 JS、CSS、HTML、Vue 文件头的六字段注释块。",
   "author": {
     "name": "Himmeltala"
