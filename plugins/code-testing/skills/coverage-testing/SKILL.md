@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Edit, Bash, Grep, Glob]
 
 # 把链路用测试锁住，再把覆盖率补上去
 
-用户调用时带了参数，参数在用户消息里（Claude 端也会填进 `$ARGUMENTS`）。
+用户调用时带了参数，参数在用户消息里，也填进 `$ARGUMENTS`。
 
 - 参数是模块或链路：从第 1 步走。
 - 参数是覆盖率目标：走第 3 步与第 4 步。

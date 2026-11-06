@@ -2,13 +2,14 @@
  * @Author: Himmeltala
  * @Date: 2026-10-29 16:02:00
  * @LastEditors: Himmeltala
- * @LastEditTime: 2026-10-29 16:02:00
+ * @LastEditTime: 2026-11-06 16:00:00
  * @FilePath: \scripts\check-plugins.mjs
- * @Description: 校验八个插件的双端打包：版本一致、技能可列出、提交闸门可拦可放。
+ * @Description: 校验八个插件的 Claude 打包：清单与目录一致、技能可列出、提交闸门脚本可拦可放。
  */
-import { readdirSync, readFileSync } from 'node:fs'
+import { readdirSync, readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { fileURLToPath, pathToFileURL } from 'node:url'
+import { spawnSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url))
 let failures = 0
@@ -22,54 +23,46 @@ function check(condition, message) {
   }
 }
 
-function fakeContext(provider, listener) {
-  return {
-    skills: { registerProvider: (factory) => { provider.value = factory() } },
-    on: (event, handler) => { if (event === 'tools/pre-execute') listener.value = handler },
-    get: (name) => name === 'workingDirectory' ? { get: () => ROOT } : undefined,
-  }
-}
-
-async function runPlugin(plugin) {
-  const dir = join(ROOT, 'plugins', plugin)
-  const manifest = JSON.parse(readFileSync(join(dir, '.claude-plugin', 'plugin.json'), 'utf8'))
-  const pkg = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8'))
-
-  check(pkg.version === manifest.version, `${plugin} 版本一致 ${pkg.version}`)
-  check(pkg.name === `dsh-local-team-${plugin}`, `${plugin} 包名 ${pkg.name}`)
-  check(pkg.dsh?.bundle?.patch === './cordis.patch.yml', `${plugin} 声明 dsh.bundle`)
-  check(pkg.files?.includes('cordis.patch.yml') === true, `${plugin} 打包带 cordis.patch.yml`)
-
-  const provider = {}
-  const listener = {}
-  const module = await import(pathToFileURL(join(dir, 'lib', 'index.js')).href)
-  module.apply(fakeContext(provider, listener))
-
-  const expected = readdirSync(join(dir, 'skills'), { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort()
-  const listed = (await provider.value.list()).map((skill) => skill.name).sort()
-  check(JSON.stringify(listed) === JSON.stringify(expected), `${plugin} 技能齐全 ${listed.join(',')}`)
-
-  const definition = await provider.value.get({ name: listed[0] })
-  check(definition?.content?.length > 0, `${plugin} 正文可读 ${definition?.name}`)
-
-  if (plugin === 'commit-guarding') {
-    const exec = (command) => ({ name: 'bash', arguments: { command, description: 'check' }, agent: { session: { header: { id: 'check' } } } })
-    const next = async () => ({ kind: 'allow' })
-    const denied = await listener.value(exec('git commit -m "feat(login): 加个功能"'), next)
-    const allowed = await listener.value(exec('ls -la'), next)
-    check(denied.kind === 'deny', 'commit-guarding 闸门拦下带范围括号的提交')
-    check(allowed.kind === 'allow', 'commit-guarding 闸门放行普通命令')
-  }
-}
-
+const marketplace = JSON.parse(readFileSync(join(ROOT, '.claude-plugin', 'marketplace.json'), 'utf8'))
 const plugins = readdirSync(join(ROOT, 'plugins'), { withFileTypes: true })
   .filter((entry) => entry.isDirectory())
   .map((entry) => entry.name)
   .sort()
+const listed = marketplace.plugins.map((entry) => entry.name).sort()
+check(JSON.stringify(listed) === JSON.stringify(plugins), `市场清单与目录一致 ${listed.join(',')}`)
 
-for (const plugin of plugins) await runPlugin(plugin)
+for (const plugin of plugins) {
+  const dir = join(ROOT, 'plugins', plugin)
+  const manifest = JSON.parse(readFileSync(join(dir, '.claude-plugin', 'plugin.json'), 'utf8'))
+  check(manifest.name === plugin, `${plugin} 清单名一致`)
+  check(/^\d+\.\d+\.\d+/.test(manifest.version), `${plugin} 版本号 ${manifest.version}`)
+  check(!existsSync(join(dir, 'package.json')) && !existsSync(join(dir, 'lib')), `${plugin} 无 DSH 残留`)
+
+  const skills = readdirSync(join(dir, 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort()
+  check(skills.length > 0, `${plugin} 技能数量 ${skills.length}`)
+}
+
+// 提交闸门：把 payload 喂给两份钩子脚本，带范围括号的提交要拦下，普通命令要放行。
+const guardDir = join(ROOT, 'plugins', 'commit-guarding', 'hooks', 'scripts')
+const payload = (command) => JSON.stringify({
+  session_id: 'check',
+  hook_event_name: 'PreToolUse',
+  tool_name: 'Bash',
+  cwd: ROOT,
+  tool_input: { command },
+})
+const runGuard = (script, command) =>
+  spawnSync('bash', [join(guardDir, script)], { input: payload(command), encoding: 'utf8' })
+
+const denied = runGuard('git-commit-guard.sh', 'git commit -m "feat(login): 加个功能"')
+check(denied.status === 2, `git 闸门拦下带范围括号的提交 exit=${denied.status}`)
+const allowed = runGuard('git-commit-guard.sh', 'ls -la')
+check(allowed.status === 0, `git 闸门放行普通命令 exit=${allowed.status}`)
+const svnDenied = runGuard('svn-commit-guard.sh', 'svn commit -m "feat(login): 加个功能"')
+check(svnDenied.status === 2, `svn 闸门拦下带范围括号的提交 exit=${svnDenied.status}`)
+
 console.log(failures === 0 ? `\n${plugins.length} 个插件全部通过` : `\n${failures} 项失败`)
 process.exit(failures === 0 ? 0 : 1)

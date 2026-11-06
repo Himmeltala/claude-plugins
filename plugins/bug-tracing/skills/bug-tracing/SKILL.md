@@ -7,7 +7,7 @@ allowed-tools: [Read, Grep, Glob, Bash]
 
 # 先数据后代码
 
-用户调用时带了参数，参数在用户消息里（Claude 端也会填进 `$ARGUMENTS`）。
+用户调用时带了参数，参数在用户消息里，也填进 `$ARGUMENTS`。
 
 - 参数是错误信息或现象：从第 1 步走。
 - 参数是接口名或功能名：从第 2 步走。

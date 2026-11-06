@@ -15,14 +15,14 @@
 
 ## 安装
 
-每个插件目录同时是 Claude Code 插件和 npm 包：`.claude-plugin/`、`hooks/`、`agents/` 给 Claude，`package.json`、`cordis.patch.yml`、`lib/` 给 DSH，`skills/` 两边共用同一份文件。`package.json` 与 `.claude-plugin/plugin.json` 的 version 必须一起改，前者决定 npm 版本，后者决定 Claude 的缓存目录。
+每个插件目录是 Claude Code 插件：`.claude-plugin/`、`hooks/`、`agents/`、`skills/`。版本写在 `.claude-plugin/plugin.json` 的 version 里，决定 Claude 的缓存目录。DSH 版本的 `commit-guarding`、`comment-trimming`、`chinese-writing` 在 `Himmeltala/dsh-plugins` 仓库，本仓库只适配 Claude Code。
 
 ### Claude Code
 
-市场源是 GitHub 上的 `Himmeltala/local-team` 仓库，本机工作副本在 `~/pros/self/local-team`：
+市场源是 GitHub 上的 `Himmeltala/claude-plugins` 仓库（市场名仍是 `local-team`），本机工作副本在 `~/pros/self/claude-plugins`：
 
 ```bash
-claude plugin marketplace add Himmeltala/local-team
+claude plugin marketplace add Himmeltala/claude-plugins
 claude plugin install commit-guarding@local-team
 claude plugin install comment-trimming@local-team
 claude plugin install chinese-writing@local-team
@@ -56,29 +56,8 @@ claude plugin install code-testing@local-team
 
 `mock-testing` 改名为 `code-testing` 后，技能拆成四个，原来的 `mock-testing:mock-testing` 变成 `code-testing:mock-testing`。
 
-### DSH
 
-DSH 自带插件安装，不用先发 npm，也不走上架：仓库已公开，直接从 GitHub 子目录装。
-
-```bash
-dsh plugin --profile web add github:Himmeltala/local-team#path:/plugins/commit-guarding
-```
-
-改源码时用本地路径，改动立即生效：
-
-```bash
-dsh plugin --profile web add ./plugins/commit-guarding
-```
-
-以后发布到 npm 后，命令换成包名 `dsh-local-team-commit-guarding`。
-
-DSH 侧由 `lib/index.js` 把包内 `skills/` 注册成技能，装完即用，不需要往 `~/.dsh/skills` 拷贝。`commit-guarding` 的提交闸门由 `lib/guard.js` 在 bash 调用前复跑同一批脚本；Claude 的 `hooks.json` 与 `agents/` 不参与 DSH。
-
-以前用软链把技能挂进 `~/.dsh/skills` 的，切到包安装后先删掉对应软链，否则同名技能按 rank 仍然命中软链那份。
-
-dshmarket 的列表只读 awesome-dsh-plugin 的目录，收录要向上游提 PR；本仓库不走那条路，市场里搜不到，不影响安装。
-
-改动后跑 `node scripts/check-plugins.mjs`，它校验版本一致、包名、技能数量与提交闸门。
+改动后跑 `node scripts/check-plugins.mjs`，它校验插件清单、技能数量与提交闸门脚本。
 
 ## 使用
 

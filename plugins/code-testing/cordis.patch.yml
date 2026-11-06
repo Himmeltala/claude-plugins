@@ -1,4 +1,0 @@
-# DSH 挂载行：id 与 name 都必须是安装后的包名，否则 DSH 解析不到模块。
-- insert:
-    - id: dsh-local-team-code-testing
-      name: dsh-local-team-code-testing

@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Edit, Bash, Grep, Glob]
 
 # Java 里写与跑测试
 
-用户调用时带了参数，参数在用户消息里（Claude 端也会填进 `$ARGUMENTS`）。
+用户调用时带了参数，参数在用户消息里，也填进 `$ARGUMENTS`。
 
 - 参数是测试类或模块：从第 1 步走。
 - 参数是构建或覆盖率工具问题：直接跳第 4 步，按症状查下面的表和 `references/`。

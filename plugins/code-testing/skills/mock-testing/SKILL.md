@@ -7,7 +7,7 @@ allowed-tools: [Read, Write, Edit, Bash, Grep, Glob]
 
 # 拿模拟服务把链路跑通
 
-用户调用时带了参数，参数在用户消息里（Claude 端也会填进 `$ARGUMENTS`）。
+用户调用时带了参数，参数在用户消息里，也填进 `$ARGUMENTS`。
 
 - 参数是链路、接口或边界：从第 1 步走。
 - 参数是故障场景：走第 3 步的故障开关，配合第 5 步逐档验证。

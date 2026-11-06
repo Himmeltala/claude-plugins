@@ -24,13 +24,6 @@ claude plugin install bug-tracing@local-team
 claude plugin install bug-tracing@local-team -s project
 ```
 
-DSH 侧是同一个目录的另一重身份，技能由包内 `lib/index.js` 注册：
-
-```bash
-dsh plugin --profile web add github:Himmeltala/local-team#path:/plugins/bug-tracing
-```
-
-改源码时换成 `./plugins/bug-tracing`。
 
 市场源地址、缓存机制与更新方式见仓库根目录的 `README.md`。
 
