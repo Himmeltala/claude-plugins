@@ -17,13 +17,13 @@ AI 输出规范插件：按场景套用固定回复结构，同时约束输出�
 ## 安装
 
 ```bash
-claude plugin install output-guard@local-team
+claude plugin install output-guard@himmeltala-claude-plugins
 ```
 
 只想在部分项目里启用、其它项目不启用时，加 `-s project` 装到项目级（在项目目录下执行）：
 
 ```bash
-claude plugin install output-guard@local-team -s project
+claude plugin install output-guard@himmeltala-claude-plugins -s project
 ```
 
 

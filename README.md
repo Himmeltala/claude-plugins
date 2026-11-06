@@ -1,4 +1,4 @@
-# local-team
+# himmeltala-claude-plugins
 
 本地团队插件市场。存放本单位自用约定，仓库托管在 GitHub 上，内容只服务本单位的使用场景。市场里八个插件各自独立安装，按项目情况挑选。
 
@@ -19,37 +19,37 @@
 
 ### Claude Code
 
-市场源是 GitHub 上的 `Himmeltala/claude-plugins` 仓库（市场名仍是 `local-team`），本机工作副本在 `~/pros/self/claude-plugins`：
+市场源是 GitHub 上的 `Himmeltala/claude-plugins` 仓库（市场名 `himmeltala-claude-plugins`），本机工作副本在 `~/pros/self/claude-plugins`：
 
 ```bash
 claude plugin marketplace add Himmeltala/claude-plugins
-claude plugin install commit-guarding@local-team
-claude plugin install comment-trimming@local-team
-claude plugin install chinese-writing@local-team
-claude plugin install code-testing@local-team
-claude plugin install bug-tracing@local-team
-claude plugin install code-shaping@local-team
-claude plugin install output-guard@local-team
-claude plugin install input-guard@local-team
+claude plugin install commit-guarding@himmeltala-claude-plugins
+claude plugin install comment-trimming@himmeltala-claude-plugins
+claude plugin install chinese-writing@himmeltala-claude-plugins
+claude plugin install code-testing@himmeltala-claude-plugins
+claude plugin install bug-tracing@himmeltala-claude-plugins
+claude plugin install code-shaping@himmeltala-claude-plugins
+claude plugin install output-guard@himmeltala-claude-plugins
+claude plugin install input-guard@himmeltala-claude-plugins
 ```
 
 只想在部分项目里启用时，在该项目目录下加 `-s project` 装到项目级：
 
 ```bash
-claude plugin install commit-guarding@local-team -s project
+claude plugin install commit-guarding@himmeltala-claude-plugins -s project
 ```
 
-插件内容是复制到 `~/.claude/plugins/cache/local-team/<插件名>/<版本>/` 的，改源目录不会自动生效。更新内容时，先运行 `claude plugin marketplace update local-team`，再运行 `claude plugin update <插件名>@local-team`，之后重启会话（钩子在会话启动时加载）。
+插件内容是复制到 `~/.claude/plugins/cache/himmeltala-claude-plugins/<插件名>/<版本>/` 的，改源目录不会自动生效。更新内容时，先运行 `claude plugin marketplace update himmeltala-claude-plugins`，再运行 `claude plugin update <插件名>@himmeltala-claude-plugins`，之后重启会话（钩子在会话启动时加载）。
 
 旧名字装过的，先卸掉再装新的——缓存目录按插件名分，改名的插件不会被自动接管：
 
 ```bash
-claude plugin uninstall control-workflow@local-team
-claude plugin uninstall comment-style@local-team
-claude plugin uninstall mock-testing@local-team
-claude plugin install commit-guarding@local-team
-claude plugin install comment-trimming@local-team
-claude plugin install code-testing@local-team
+claude plugin uninstall control-workflow@himmeltala-claude-plugins
+claude plugin uninstall comment-style@himmeltala-claude-plugins
+claude plugin uninstall mock-testing@himmeltala-claude-plugins
+claude plugin install commit-guarding@himmeltala-claude-plugins
+claude plugin install comment-trimming@himmeltala-claude-plugins
+claude plugin install code-testing@himmeltala-claude-plugins
 ```
 
 更早的两个旧名（`svn-team-conventions`、`svn-workflow`）同样先卸后装。

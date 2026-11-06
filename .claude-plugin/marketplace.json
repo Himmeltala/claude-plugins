@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "local-team",
+  "name": "himmeltala-claude-plugins",
   "description": "本地团队插件市场。存放本单位自用约定（版本控制工作流、注释规范、中文表达规范、编码思维）与把代码测通、问题排查的套路，仓库托管在 GitHub 上。",
   "owner": {
     "name": "Himmeltala"

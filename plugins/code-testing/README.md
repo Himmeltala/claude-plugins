@@ -24,13 +24,13 @@
 ## 安装
 
 ```bash
-claude plugin install code-testing@local-team
+claude plugin install code-testing@himmeltala-claude-plugins
 ```
 
 只想在部分项目里启用、其它项目不启用时，加 `-s project` 装到项目级（在项目目录下执行）：
 
 ```bash
-claude plugin install code-testing@local-team -s project
+claude plugin install code-testing@himmeltala-claude-plugins -s project
 ```
 
 
@@ -39,8 +39,8 @@ claude plugin install code-testing@local-team -s project
 装过旧版本的注意：本插件早先叫 `mock-testing`，那个名字已撤掉，调用路径由 `/mock-testing:mock-testing` 变成 `/code-testing:mock-testing`。先卸再装：
 
 ```bash
-claude plugin uninstall mock-testing@local-team
-claude plugin install code-testing@local-team
+claude plugin uninstall mock-testing@himmeltala-claude-plugins
+claude plugin install code-testing@himmeltala-claude-plugins
 ```
 
 ## 使用

@@ -15,13 +15,13 @@
 ## 安装
 
 ```bash
-claude plugin install bug-tracing@local-team
+claude plugin install bug-tracing@himmeltala-claude-plugins
 ```
 
 只想在部分项目里启用、其它项目不启用时，加 `-s project` 装到项目级（在项目目录下执行）：
 
 ```bash
-claude plugin install bug-tracing@local-team -s project
+claude plugin install bug-tracing@himmeltala-claude-plugins -s project
 ```
 
 

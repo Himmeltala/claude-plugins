@@ -18,13 +18,13 @@ SVN 与 git 两种工作副本都管，按目录下有没有 `.svn` 或 `.git` �
 ## 安装
 
 ```bash
-claude plugin install commit-guarding@local-team
+claude plugin install commit-guarding@himmeltala-claude-plugins
 ```
 
 只想在部分项目里启用、其它项目不启用时，加 `-s project` 装到项目级（在项目目录下执行）：
 
 ```bash
-claude plugin install commit-guarding@local-team -s project
+claude plugin install commit-guarding@himmeltala-claude-plugins -s project
 ```
 
 

@@ -15,13 +15,13 @@ AI 输入检查插件：用户发来任务、代码、日志、数据时，先�
 ## 安装
 
 ```bash
-claude plugin install input-guard@local-team
+claude plugin install input-guard@himmeltala-claude-plugins
 ```
 
 只想在部分项目里启用、其它项目不启用时，加 `-s project` 装到项目级（在项目目录下执行）：
 
 ```bash
-claude plugin install input-guard@local-team -s project
+claude plugin install input-guard@himmeltala-claude-plugins -s project
 ```
 
 
