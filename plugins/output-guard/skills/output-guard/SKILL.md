@@ -41,5 +41,4 @@ allowed-tools: [Read, Grep, Glob]
 
 - 只管 AI 的回复侧；用户输入侧的敏感信息与冗余，归 `input-guard` 插件。
 - 中文措辞与篇幅数值，以 `chinese-writing` 插件为准。
-- 排查本身怎么查，走 `bug-tracing` 技能；本技能只负责结论怎么组织。
 - 省 token 不等于省略证据。结论依赖的 SQL、日志行、代码位置必须给全。

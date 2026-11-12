@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "himmeltala-claude-plugins",
-  "description": "本地团队插件市场。存放本单位自用约定（版本控制工作流、注释规范、中文表达规范、编码思维）与把代码测通、问题排查的套路，仓库托管在 GitHub 上。",
+  "description": "本地团队插件市场。存放本单位自用约定（版本控制工作流、注释规范、中文表达规范），仓库托管在 GitHub 上。",
   "owner": {
     "name": "Himmeltala"
   },
@@ -53,62 +53,6 @@
         "style"
       ],
       "source": "./plugins/chinese-writing"
-    },
-    {
-      "name": "code-testing",
-      "description": "把代码测通的四个技能。mock-testing 在进程外起模拟服务把链路跑通，覆盖划边界、抄契约、写模拟服务、三层验证与收尾还原，边界覆盖 HTTP 与 WebSocket、RPC、消息队列、数据库、文件、串口设备与时钟。coverage-testing 在测试代码里写假对端做端到端测试，按未覆盖行补测把覆盖率拉到 90%，并连跑验稳。java-testing 记 Java 里写这类测试的 JUnit 5、surefire 与 JaCoCo 具体写法与坑。test-reporting 负责测试用例表、测试报告、终端截图与结果回填。",
-      "author": {
-        "name": "Himmeltala"
-      },
-      "category": "testing",
-      "keywords": [
-        "testing",
-        "mock",
-        "stub",
-        "coverage",
-        "jacoco",
-        "junit",
-        "java",
-        "fault-injection",
-        "test-report",
-        "test-case",
-        "xlsx",
-        "docx",
-        "screenshot"
-      ],
-      "source": "./plugins/code-testing"
-    },
-    {
-      "name": "bug-tracing",
-      "description": "问题排查：优先查数据源，数据核实无误后再沿代码调用链逐段核对，需要时经授权连库取部分数据作证。数据库只读，连库前先问清环境、库名与库类型；结论只在会话里给，不落盘。",
-      "author": {
-        "name": "Himmeltala"
-      },
-      "category": "debugging",
-      "keywords": [
-        "debugging",
-        "tracing",
-        "call-chain",
-        "data-source",
-        "sql"
-      ],
-      "source": "./plugins/bug-tracing"
-    },
-    {
-      "name": "code-shaping",
-      "description": "编码思维：写之前先找项目已有的机制与公共函数。只有第二处要用才抽公共函数，长函数不算问题；参数过长改为传对象。胶水代码优先泛化。模式用来隔离变化点，同时不许过度抽象：只有一处用到的不抽，抽出来比调用处还长就退回。",
-      "author": {
-        "name": "Himmeltala"
-      },
-      "category": "conventions",
-      "keywords": [
-        "coding",
-        "refactoring",
-        "reuse",
-        "abstraction",
-        "design-patterns"
-      ],
-      "source": "./plugins/code-shaping"
     },
     {
       "name": "output-guard",

@@ -1,15 +1,12 @@
 # himmeltala-claude-plugins
 
-本地团队插件市场。存放本单位自用约定，仓库托管在 GitHub 上，内容只服务本单位的使用场景。市场里八个插件各自独立安装，按项目情况挑选。
+本地团队插件市场。存放本单位自用约定，仓库托管在 GitHub 上，内容只服务本单位的使用场景。市场里五个插件各自独立安装，按项目情况挑选。
 
 | 插件                 | 管什么                                                                                                                                           | 什么时候装                                       |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
 | `commit-guarding`  | 版本控制工作流：SVN 与 git 两套提交流程的检查与硬闸门、提交信息格式、命令速查、冲突与撤销踩坑                                                    | 用 SVN 或 git 管的项目都装，按工作副本类型分流   |
 | `comment-trimming` | 注释规范：稀疏优先、只讲本段代码、不复述实现、禁装饰、编辑文件时整文件顺手清干净、整目录批量清理的子代理；Java 类头 Javadoc 与前端文件头六字段块单独一个技能 | 所有 Java、Vue 或 JavaScript 项目                |
 | `chinese-writing`  | 中文表达与理解：介词、量词、关联词、语序、术语、篇幅、禁符号代字与翻译腔；文档与注释不复述实现细节                                               | 所有项目                                         |
-| `code-testing`     | 把代码测通的三段套路：进程外起模拟服务跑通链路、进程内假对端写端到端测试并按覆盖率补测、Java 里写这类测试的构建与 JVM 坑                         | 需要频繁复现链路问题、或要把链路用测试锁住的项目 |
-| `bug-tracing`      | 问题排查：先查数据源，数据核实无误再沿调用链读代码，需要时经授权连库取部分数据作证                                                               | 所有项目                                         |
-| `code-shaping`     | 编码思维：复用优先、只有第二处要用才抽公共函数、参数过长传对象、胶水代码泛化、模式用得其所、不许过度抽象                                 | 所有项目                                         |
 | `output-guard`     | AI 输出规范：排查与故障结论、代码改动说明、进度与结果汇报三类结构，按内容伸缩；输出侧省 token，结论先行、不复述、只给相关片段                 | 所有项目                                         |
 | `input-guard`      | AI 输入检查：敏感信息与脱敏、输入要素补全、从源头省 token；只管输入侧，不压缩回复                                                                | 所有项目                                         |
 
@@ -26,9 +23,6 @@ claude plugin marketplace add Himmeltala/claude-plugins
 claude plugin install commit-guarding@himmeltala-claude-plugins
 claude plugin install comment-trimming@himmeltala-claude-plugins
 claude plugin install chinese-writing@himmeltala-claude-plugins
-claude plugin install code-testing@himmeltala-claude-plugins
-claude plugin install bug-tracing@himmeltala-claude-plugins
-claude plugin install code-shaping@himmeltala-claude-plugins
 claude plugin install output-guard@himmeltala-claude-plugins
 claude plugin install input-guard@himmeltala-claude-plugins
 ```
@@ -49,13 +43,9 @@ claude plugin uninstall comment-style@himmeltala-claude-plugins
 claude plugin uninstall mock-testing@himmeltala-claude-plugins
 claude plugin install commit-guarding@himmeltala-claude-plugins
 claude plugin install comment-trimming@himmeltala-claude-plugins
-claude plugin install code-testing@himmeltala-claude-plugins
 ```
 
 更早的两个旧名（`svn-team-conventions`、`svn-workflow`）同样先卸后装。
-
-`mock-testing` 改名为 `code-testing` 后，技能拆成四个，原来的 `mock-testing:mock-testing` 变成 `code-testing:mock-testing`。
-
 
 改动后跑 `node scripts/check-plugins.mjs`，它校验插件清单、技能数量与提交闸门脚本。
 
