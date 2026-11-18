@@ -1,0 +1,16 @@
+{
+  "description": "按对话内容更新会话标题：每次用户提交消息时，先回填上一次在后台生成好的标题，再按间隔在后台重新生成一次",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/session-title.sh\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

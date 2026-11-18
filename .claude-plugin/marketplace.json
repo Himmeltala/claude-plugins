@@ -86,6 +86,22 @@
         "token"
       ],
       "source": "./plugins/input-guard"
+    },
+    {
+      "name": "session-naming",
+      "description": "按对话内容自动更新会话标题：Claude Code 内置的 AI 标题只在首轮生成一次，之后全程不变；本插件在后台按间隔重新概括，经 UserPromptSubmit 钩子回填，用户手动 /rename 过的会话自动停手。",
+      "author": {
+        "name": "Himmeltala"
+      },
+      "category": "workflow",
+      "keywords": [
+        "session",
+        "title",
+        "rename",
+        "hook",
+        "naming"
+      ],
+      "source": "./plugins/session-naming"
     }
   ]
 }
