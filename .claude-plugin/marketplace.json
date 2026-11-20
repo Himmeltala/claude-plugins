@@ -24,7 +24,7 @@
     },
     {
       "name": "comment-trimming",
-      "description": "注释规范：稀疏优先，默认可不写；只讲本段代码，不记调用链；篇幅短，最多两行；禁 emoji 与装饰分割线。编辑某个文件时，顺手把该文件整文件清干净；另配 comment-trimmer 子代理做整目录的存量批量清理。header-comment 技能管 Java 类头 Javadoc，以及 JS、CSS、HTML、Vue 文件头的六字段注释块。",
+      "description": "注释规范：默认不写，写则一行；只讲本段代码，禁装饰与调用链；编辑文件时整文件顺手清干净，另配 comment-trimmer 子代理做整目录清理。header-comment 管类头 Javadoc 与前端文件头六字段块。",
       "author": {
         "name": "Himmeltala"
       },
@@ -41,7 +41,7 @@
     },
     {
       "name": "chinese-writing",
-      "description": "中文表达与理解规范：介词、量词、关联词写全，语序按中文，术语统一，一句一义，禁符号代字与翻译腔，中英混排加空格；读中文需求遇歧义先复述确认。",
+      "description": "中文表达与理解：介词、量词、关联词写全，语序按中文，术语统一，禁符号代字与翻译腔，中英混排空格；读需求有歧义先复述确认。",
       "author": {
         "name": "Himmeltala"
       },
@@ -53,39 +53,6 @@
         "style"
       ],
       "source": "./plugins/chinese-writing"
-    },
-    {
-      "name": "output-guard",
-      "description": "AI 输出规范：按场景套用固定回复结构，排查与故障结论按现象、根因、证据、影响范围、修复方向组织；代码改动说明按改了什么、为什么、影响范围、验证方式组织；进度与结果汇报按已完成、未完成或受阻、下一步组织。同时约束输出侧 token：结论先行、不复述问题、只给相关片段、分轮输出。",
-      "author": {
-        "name": "Himmeltala"
-      },
-      "category": "workflow",
-      "keywords": [
-        "reply",
-        "template",
-        "report",
-        "troubleshooting",
-        "output",
-        "token"
-      ],
-      "source": "./plugins/output-guard"
-    },
-    {
-      "name": "input-guard",
-      "description": "AI 输入检查：用户发来任务、代码、日志、数据时，先查敏感信息并建议脱敏，再补全目标、范围、期望结果、约束与验收标准，最后从输入源头控制 token：用路径代替整文件、日志只留关键行、大任务拆小。只管输入侧，不压缩 AI 回复。",
-      "author": {
-        "name": "Himmeltala"
-      },
-      "category": "workflow",
-      "keywords": [
-        "input",
-        "privacy",
-        "security",
-        "prompt",
-        "token"
-      ],
-      "source": "./plugins/input-guard"
     },
     {
       "name": "session-naming",

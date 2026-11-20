@@ -4,7 +4,7 @@
  * @LastEditors: Himmeltala
  * @LastEditTime: 2026-11-06 16:00:00
  * @FilePath: \scripts\check-plugins.mjs
- * @Description: 校验八个插件的 Claude 打包：清单与目录一致、技能可列出、提交闸门脚本可拦可放。
+ * @Description: 校验插件的 Claude 打包：清单与目录一致、技能可列出、提交闸门脚本可拦可放。
  */
 import { readdirSync, readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'

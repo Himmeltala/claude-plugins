@@ -1,14 +1,12 @@
 # himmeltala-claude-plugins
 
-本地团队插件市场。存放本单位自用约定，仓库托管在 GitHub 上，内容只服务本单位的使用场景。市场里六个插件各自独立安装，按项目情况挑选。
+本地团队插件市场。存放本单位自用约定，仓库托管在 GitHub 上，内容只服务本单位的使用场景。市场里四个插件各自独立安装，按项目情况挑选。
 
 | 插件                 | 管什么                                                                                                                                           | 什么时候装                                       |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
 | `commit-guarding`  | 版本控制工作流：SVN 与 git 两套提交流程的检查与硬闸门、提交信息格式、命令速查、冲突与撤销踩坑                                                    | 用 SVN 或 git 管的项目都装，按工作副本类型分流   |
-| `comment-trimming` | 注释规范：稀疏优先、只讲本段代码、不复述实现、禁装饰、编辑文件时整文件顺手清干净、整目录批量清理的子代理；Java 类头 Javadoc 与前端文件头六字段块单独一个技能 | 所有 Java、Vue 或 JavaScript 项目                |
+| `comment-trimming` | 注释规范：默认不写、写则一行、只讲本段代码、禁装饰；编辑文件时整文件顺手清干净，整目录批量清理交给 comment-trimmer；类头 Javadoc 与前端文件头单独一个技能 | 所有 Java、Vue 或 JavaScript 项目                |
 | `chinese-writing`  | 中文表达与理解：介词、量词、关联词、语序、术语、篇幅、禁符号代字与翻译腔；文档与注释不复述实现细节                                               | 所有项目                                         |
-| `output-guard`     | AI 输出规范：排查与故障结论、代码改动说明、进度与结果汇报三类结构，按内容伸缩；输出侧省 token，结论先行、不复述、只给相关片段                 | 所有项目                                         |
-| `input-guard`      | AI 输入检查：敏感信息与脱敏、输入要素补全、从源头省 token；只管输入侧，不压缩回复                                                                | 所有项目                                         |
 | `session-naming`   | 会话标题：内置 AI 标题只在首轮生成一次，本插件在后台按对话内容重新概括并经钩子回填；用户 `/rename` 过的会话自动停手                              | 会话开得长、要按主题找历史会话                   |
 
 ## 安装
@@ -24,8 +22,6 @@ claude plugin marketplace add Himmeltala/claude-plugins
 claude plugin install commit-guarding@himmeltala-claude-plugins
 claude plugin install comment-trimming@himmeltala-claude-plugins
 claude plugin install chinese-writing@himmeltala-claude-plugins
-claude plugin install output-guard@himmeltala-claude-plugins
-claude plugin install input-guard@himmeltala-claude-plugins
 claude plugin install session-naming@himmeltala-claude-plugins
 ```
 
