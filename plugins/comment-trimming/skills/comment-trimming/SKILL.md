@@ -16,7 +16,7 @@ allowed-tools: [Read, Edit, Write, Grep, Glob, Bash]
 ## 五条硬规矩
 
 1. **默认不写。** 能自解释就不加，只写非显然的"为什么"。
-2. **短。** 篇幅按 `chinese-writing` 的篇幅标准，所有注释类型一样：`//`、字段与方法注解、Mapper XML 的 `--`、模板 `<!-- -->`。一行写不完，就把信息挪进命名、常量或文档。
+2. **短。** 一行，最多两行；所有注释类型一样：`//`、字段与方法注解、Mapper XML 的 `--`、模板 `<!-- -->`。一行写不完，就把信息挪进命名、常量或文档。
 3. **不用符号装饰。** 禁 emoji、`=====`/`*****` 分割线、ASCII 艺术、`★ ✅ 🚀`。
 4. **不复述代码。** `setName()` 上写 `// 设置 name` 是噪音。也不写会随实现变化的内容。
 5. **只讲本段代码。** 不写调用关系与调用链，要看就用编辑器查找引用。
@@ -25,7 +25,7 @@ allowed-tools: [Read, Edit, Write, Grep, Glob, Bash]
 
 **三类例外**：文件头与类头（写法见 `header-comment`）、功能性指令（`eslint-disable`、`@SuppressWarnings`、`//noinspection` 原样保留，只压里面的人话）、注解值（`@ApiModelProperty`、`@ApiOperation` 的 value 与 notes 属接口文档，同样不写长）。
 
-符号规则以 `chinese-writing` 为准。注释里多一条边界：**字符串字面量与注解值里的符号是数据，一个字不动**。前端另有 eslint 规则拦符号，见 `references/symbol-rules.md`。
+本插件只管注释的删留、篇幅与格式。注释里的字符串字面量与注解值是数据，删留时一个字不动。前端另有 eslint 规则拦注释符号，实测行为见 `references/symbol-rules.md`。
 
 ## 注释形式
 
@@ -37,7 +37,7 @@ Java、Vue、JS：`//`、`/* */`、`/** */`，模板用 `<!-- -->`；Mapper XML�
 |---|---|
 | `references/java-conventions.md` | 字段 `@ApiModelProperty`、控制层方法 `@ApiOperation`、行内注释取舍 |
 | `references/js-conventions.md` | 单行注释与函数 JSDoc |
-| `references/symbol-rules.md` | 注释符号禁忌与两个规则缺陷 |
+| `references/symbol-rules.md` | 前端 eslint 符号规则的实际行为与两个缺陷 |
 | `references/trim-rules.md` | 删什么、留什么、判断边界（权威） |
 
 关键：Java 字段用 `@ApiModelProperty`，控制层方法用 `@ApiOperation`；Service 内部与私有方法不加注解、不补 Javadoc。存量是 Swagger 注解风格，新代码必须一致；新项目沿用，与存量冲突时先对齐再报给用户。

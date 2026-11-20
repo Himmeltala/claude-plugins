@@ -1,19 +1,24 @@
 # commit-guarding
 
-版本控制工作流插件：管提交前的检查与拦截。注释规范在 `comment-trimming` 插件，中文规范在 `chinese-writing` 插件，三者互不依赖，装哪个用哪个。
+管两件事：
 
-SVN 与 git 两种工作副本都管，按目录下有没有 `.svn` 或 `.git` 分流：同一个会话里既有 SVN 项目又有 git 项目也能用，各自走各自那套。工作副本不在版本控制之下的不需要它。
+1. **提交信息一行，且带类型前缀**：`feat`、`fix`、`docs`、`style`、`refactor`、`chore`、`test`、`ci`、`revert`。
+2. **提交或推送前先拉取最新代码、解决冲突，然后再提交或推送**。
+
+其余 git 与 svn 用法不干预。
+
+SVN 与 git 两种工作副本都管，按目录下有没有 `.svn` 或 `.git` 分流。
 
 ## 组件
 
 | 组件 | 类型 | 作用 |
 |---|---|---|
-| `svn-commit` | 技能 | 提交前检查流程、提交信息格式、SVN 命令速查、冲突与编码踩坑处理 |
-| `git-commit` | 技能 | 提交前拉最新、提交信息格式、git 命令速查、变基冲突与撤销处理。提交信息格式与 `svn-commit` 共用一份细则 |
-| svn-commit-guard | 钩子 | PreToolUse 拦 `svn commit`：工作副本落后于服务器、有未解决冲突、提交信息前缀带范围括号 |
-| git-commit-guard | 钩子 | PreToolUse 拦 `git commit`：前缀带范围括号、信息不是单行、没给信息、处于 detached HEAD、落后或分叉于远端 |
+| `svn-commit` | 技能 | 提交信息格式；提交前 `svn update`、冲突清零 |
+| `git-commit` | 技能 | 提交信息格式；提交与推送前拉取、冲突清零 |
+| `svn-commit-guard` | 钩子 | 拦 `svn commit`：信息不合规、落后于服务器或有未解决冲突 |
+| `git-commit-guard` | 钩子 | 拦 `git commit`：信息不合规、落后或分叉；拦 `git push`：落后或分叉 |
 
-提交细则在技能触发时加载；PreToolUse 闸门常驻，提交命令一执行就检查。
+技能在提交、推送、拉取、冲突时触发；钩子常驻，命令一执行就检查，只拦不改。
 
 ## 安装
 
@@ -27,14 +32,10 @@ claude plugin install commit-guarding@himmeltala-claude-plugins
 claude plugin install commit-guarding@himmeltala-claude-plugins -s project
 ```
 
-
 市场源地址、缓存机制与更新方式见仓库根目录的 `README.md`。
 
 ## 使用
 
-技能多数会自动触发，也可以显式调用：
-
-- `/commit-guarding:svn-commit` —— 走一遍 SVN 提交流程并生成提交信息
-- `/commit-guarding:git-commit` —— 走一遍 git 提交流程并生成提交信息
-
-触发词包括"提交"、"提交代码"、"git commit"、"svn commit"、"改了什么"、"git status"、"svn status"、"推送"、"拉最新代码"、"冲突了"、"回滚"、"撤销修改"、"看历史"。提交闸门的两份钩子无需触发，提交命令一执行就生效。
+- 说"提交""推送""拉最新""冲突了"：触发对应技能
+- `/commit-guarding:svn-commit`、`/commit-guarding:git-commit`：显式调用
+- 闸门无需触发，`svn commit`、`git commit`、`git push` 一执行就检查

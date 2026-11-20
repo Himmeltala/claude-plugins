@@ -1,5 +1,5 @@
 {
-  "description": "提交前拦下两种提交：svn commit（落后于服务器、有未解决冲突、前缀带范围括号）、git commit（前缀带范围括号、信息不是单行、没给信息、detached HEAD、落后或分叉于远端）",
+  "description": "管两件事：提交信息必须单行且带 feat、fix、docs 等类型前缀；提交或推送前先拉最新、解决冲突。svn commit 落后或有冲突时拦下，git commit 与 git push 落后或分叉时拦下",
   "hooks": {
     "PreToolUse": [
       {

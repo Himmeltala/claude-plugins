@@ -1,14 +1,14 @@
 # chinese-writing
 
-中文表达与理解规范插件：约束助手怎么写中文，以及怎么读中文需求。
+插件只约束一件事：AI 写中文时，用词、标点符号、语序符合中文。篇幅、文档结构、任务理解都不归它管。
 
 ## 组件
 
 | 组件 | 类型 | 作用 |
 |---|---|---|
-| `chinese-writing` | 技能 | 落盘产出十条、篇幅标准、读需求的歧义确认 |
+| `chinese-writing` | 技能 | 中文用词、标点符号、语序规则 |
 
-技能内另有三份参考：`symbols-and-grammar.md`（符号与语法）、`translationese.md`（翻译腔）、`reading-chinese.md`（读需求）。
+参考文件两份：`symbols-and-grammar.md`（符号、介词、量词、语序、混排）、`translationese.md`（翻译腔对照）。
 
 ## 安装
 
@@ -26,7 +26,7 @@ claude plugin install chinese-writing@himmeltala-claude-plugins -s project
 
 ## 使用
 
-技能会在写注释、文档、提交信息时自动触发，也可以显式调用：
+技能会在写中文时自动触发，也可以显式调用：
 
-- 说"中文不通""缺介词""符号代字""翻译腔" —— 触发规则
+- 说"中文不通""缺介词""符号代字""翻译腔""语序不对" —— 触发规则
 - `/chinese-writing:chinese-writing` —— 显式走一遍规则

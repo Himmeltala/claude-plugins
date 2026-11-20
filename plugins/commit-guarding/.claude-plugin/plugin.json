@@ -1,10 +1,16 @@
 {
   "name": "commit-guarding",
-  "version": "0.4.4",
-  "description": "版本控制工作流插件：SVN 与 git 两套提交流程的检查与硬闸门（提交前先拉最新、冲突清零、单行提交信息格式、前缀不带范围括号）、命令速查、冲突与撤销踩坑处理。按工作副本下有没有 .svn 或 .git 分流，两种项目都能用。",
+  "version": "0.5.1",
+  "description": "版本控制约束：提交信息必须单行并带 feat、fix、docs 等类型前缀；提交或推送前先拉取最新、解决冲突。其余 git 与 svn 用法不干预。",
   "author": {
     "name": "Himmeltala"
   },
-  "keywords": ["svn", "git", "commit", "version-control", "workflow"],
+  "keywords": [
+    "svn",
+    "git",
+    "commit",
+    "version-control",
+    "workflow"
+  ],
   "license": "UNLICENSED"
 }

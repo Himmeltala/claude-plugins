@@ -19,7 +19,7 @@ tools: ["Read", "Grep", "Glob", "Edit", "Bash"]
 
 ## 规范
 
-以 `skills/comment-trimming/references/trim-rules.md` 为准，先读它，再按语言读 `java-conventions.md`、`js-conventions.md` 或 `symbol-rules.md`。篇幅与符号规则以 `chinese-writing` 为准，本插件只执行。
+以 `skills/comment-trimming/references/trim-rules.md` 为准，先读它，再按语言读 `java-conventions.md`、`js-conventions.md` 或 `symbol-rules.md`。注释篇幅按本插件规则：一行，最多两行；注释符号受前端 eslint 约束，实测见 `symbol-rules.md`。
 
 ## 流程
 

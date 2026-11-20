@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "commit-guarding",
-      "description": "版本控制工作流：SVN 与 git 两套提交流程的检查与硬闸门、命令速查、冲突与撤销踩坑处理。按工作副本下有没有 .svn 或 .git 分流。提交信息格式细则见插件内的 `commit-message-format.md`。",
+      "description": "版本控制约束：提交信息必须单行并带 feat、fix、docs 等类型前缀；提交或推送前先拉取最新、解决冲突。其余 git 与 svn 用法不干预。",
       "author": {
         "name": "Himmeltala"
       },
@@ -41,7 +41,7 @@
     },
     {
       "name": "chinese-writing",
-      "description": "中文表达与理解：介词、量词、关联词写全，语序按中文，术语统一，禁符号代字与翻译腔，中英混排空格；读需求有歧义先复述确认。",
+      "description": "中文写作规范：写中文时用词、标点符号、语序符合中文；禁符号代字与翻译腔，中英混排加空格。",
       "author": {
         "name": "Himmeltala"
       },

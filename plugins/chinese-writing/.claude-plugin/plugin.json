@@ -1,10 +1,15 @@
 {
   "name": "chinese-writing",
-  "version": "0.4.0",
-  "description": "中文表达与理解：介词、量词、关联词写全，语序按中文，术语统一，禁符号代字与翻译腔，中英混排空格，篇幅按产出物定；读需求有歧义先复述确认。",
+  "version": "0.5.0",
+  "description": "中文写作规范：写中文时用词、标点符号、语序符合中文；禁符号代字与翻译腔，中英混排加空格。",
   "author": {
     "name": "Himmeltala"
   },
-  "keywords": ["chinese", "writing", "documentation", "style"],
+  "keywords": [
+    "chinese",
+    "writing",
+    "documentation",
+    "style"
+  ],
   "license": "UNLICENSED"
 }
