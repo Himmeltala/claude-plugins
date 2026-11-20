@@ -75,6 +75,10 @@ state_set() { # 文件 键 值
 # transcript 里最后一条 custom-title。钩子设置的标题，Claude Code 同样写成
 # custom-title，与用户 /rename 的结果在文件里没有区别，只能靠与自己上次回填的值比对
 # 来认出「用户手动改过」。只读末尾两千行：标题每条消息都会重新落一次，总在尾部。
+#
+# 建会话时就带标题的情况另算：Claude Code 在 /clear 或从已有会话续开时，把当前会话的
+# 标题当成新会话的初始元数据写在文件最前面，新会话一出生就顶着上一个会话的名字。
+# 这种标题不是用户改的，用 inherited_title 单独认出来。
 last_custom_title() { # transcript
   [ -f "$1" ] || return 0
   if command -v python3 >/dev/null 2>&1; then
@@ -96,5 +100,32 @@ sys.stdout.write(last)
     tail -n 2000 -- "$1" 2>/dev/null |
       jq -R -r 'fromjson? | select(.type == "custom-title") | .customTitle' 2>/dev/null |
       tail -n 1
+  fi
+}
+
+# transcript 的第一条记录就是 custom-title，说明标题是建会话时继承来的：
+# 这种继承标题写在文件最前面，而用户 /rename 只会往文件尾部追加，不会落在第一行。
+# 输出该标题；首条记录不是标题时什么都不输出。
+inherited_title() { # transcript
+  [ -f "$1" ] || return 0
+  if command -v python3 >/dev/null 2>&1; then
+    head -n 5 -- "$1" 2>/dev/null | python3 -c '
+import json, sys
+for line in sys.stdin:
+    line = line.strip()
+    if not line:
+        continue
+    try:
+        entry = json.loads(line)
+    except Exception:
+        sys.exit(1)
+    if entry.get("type") == "custom-title" and isinstance(entry.get("customTitle"), str):
+        sys.stdout.write(entry["customTitle"])
+    sys.exit(0)
+' 2>/dev/null
+  elif command -v jq >/dev/null 2>&1; then
+    head -n 5 -- "$1" 2>/dev/null |
+      jq -R -r 'fromjson? | select(.type == "custom-title") | .customTitle' 2>/dev/null |
+      head -n 1
   fi
 }

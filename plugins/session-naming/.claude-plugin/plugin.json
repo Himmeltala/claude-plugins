@@ -1,6 +1,6 @@
 {
   "name": "session-naming",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "按对话内容自动更新会话标题：内置的 AI 标题只在首轮生成一次，之后全程不变；本插件在后台按间隔重新概括，经 UserPromptSubmit 钩子回填。用户手动 /rename 过的会话自动停手。",
   "author": {
     "name": "Himmeltala"

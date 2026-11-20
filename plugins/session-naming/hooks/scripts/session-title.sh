@@ -11,6 +11,10 @@
 # custom-title 和自己上次回填的值比，不相等才算手动改，改了以后本会话永久停手。
 # 首次运行、缓存又被清过的情况下，旧标题会被当成手动设置——宁可停手也不覆盖用户。
 #
+# 唯一的例外是建会话时继承来的标题：/clear 或从已有会话续开时，Claude Code 把当前标题
+# 写进新文件的第一条记录，新会话一出生命字就和旁边那个会话一样。那不是用户改的，
+# 认出来以后照常生成自己的标题，免得两个会话永远同名。
+#
 # 只有用户亲自提交的消息才排期：loop、定时唤醒、peer 消息这类注入轮次不触发重命名。
 #
 # 任何异常一律放行：钩子只做锦上添花，自身出故障时绝不能堵住用户的提问。
@@ -43,11 +47,14 @@ main() {
   applied=$(state_get "$state" applied)
   pending=$(state_get "$state" pending)
 
-  # 用户用 /rename 改过名就停手，本会话不再碰标题
+  # 用户用 /rename 改过名就停手，本会话不再碰标题。
+  # 建会话时继承来的标题不算用户改的，继续走后面的生成流程。
   seen=$(last_custom_title "$transcript")
   if [ -n "$seen" ] && [ "$seen" != "$applied" ] && [ "$seen" != "$pending" ]; then
-    state_set "$state" manual 1
-    exit 0
+    if [ "$(inherited_title "$transcript")" != "$seen" ]; then
+      state_set "$state" manual 1
+      exit 0
+    fi
   fi
 
   local title=""
