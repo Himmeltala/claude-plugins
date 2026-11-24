@@ -35,9 +35,9 @@ main() {
 
   local -a input=()
   mapfile -d '' -t input < <(parse_input "$raw")
-  [ "${#input[@]}" -eq 6 ] || exit 0
+  [ "${#input[@]}" -eq 7 ] || exit 0
 
-  local session_id="${input[1]}" transcript="${input[2]}" source="${input[4]}"
+  local session_id="${input[1]}" transcript="${input[2]}" source="${input[4]}" cwd="${input[6]}"
   [ -n "$session_id" ] || exit 0
 
   local state="$DATA_DIR/${session_id}.state"
@@ -101,8 +101,11 @@ main() {
   # 脱离父进程：钩子退出后 worker 继续跑，输出全部丢弃，不污染钩子的 stdout。
   # 重定向要加在整个子 shell 上：只写在 nohup 那一层的话，包着 `cd &&` 的那层子 shell
   # 仍握着钩子的 stdout 管道，调用方要等 worker 跑完才读到 EOF，等于同步执行。
+  # 项目名在这里算好传进去：worker 会把工作目录切到数据目录，自己取不到项目名。
+  local project
+  project=$(project_name "${cwd:-$PWD}")
   ( cd "$DATA_DIR" && exec env CLAUDE_SESSION_TITLE_WORKER=1 \
-    nohup bash "$SCRIPT_DIR/title-worker.sh" "$session_id" "$transcript" ) \
+    nohup bash "$SCRIPT_DIR/title-worker.sh" "$session_id" "$transcript" "$project" ) \
     >/dev/null 2>&1 </dev/null &
 
   exit 0

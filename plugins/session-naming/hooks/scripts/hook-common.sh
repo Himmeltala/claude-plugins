@@ -15,8 +15,8 @@ case "$INTERVAL" in
 esac
 [ "$INTERVAL" -ge 1 ] || INTERVAL=1
 
-# 输出钩子输入里的六个字段，用 NUL 分隔：事件名、会话 ID、transcript 路径、提问正文、
-# 提问来源、当前标题。bash 变量存不了 NUL，调用方用 mapfile 接。
+# 输出钩子输入里的七个字段，用 NUL 分隔：事件名、会话 ID、transcript 路径、提问正文、
+# 提问来源、当前标题、工作目录。bash 变量存不了 NUL，调用方用 mapfile 接。
 parse_input() {
   local raw="$1"
   if command -v python3 >/dev/null 2>&1; then
@@ -26,13 +26,14 @@ try:
     d = json.load(sys.stdin)
 except Exception:
     sys.exit(1)
-keys = ("hook_event_name", "session_id", "transcript_path", "prompt", "source", "session_title")
+keys = ("hook_event_name", "session_id", "transcript_path", "prompt", "source", "session_title", "cwd")
 # 末尾补一个 NUL：最后一段常为空（比如没有 session_title），不补的话 mapfile 读不到它
 sys.stdout.write("\0".join("" if d.get(k) is None else str(d.get(k)) for k in keys) + "\0")
 ' <<<"$raw" 2>/dev/null
   elif command -v jq >/dev/null 2>&1; then
     jq -j '[.hook_event_name // "", .session_id // "", .transcript_path // "",
-            .prompt // "", .source // "", .session_title // ""] | join("\u0000") + "\u0000"' \
+            .prompt // "", .source // "", .session_title // "", .cwd // ""]
+           | join("\u0000") + "\u0000"' \
       <<<"$raw" 2>/dev/null
   else
     return 1
@@ -52,6 +53,27 @@ print(json.dumps({"hookSpecificOutput": {"hookEventName": "UserPromptSubmit",
   elif command -v jq >/dev/null 2>&1; then
     jq -nc --arg t "$title" \
       '{hookSpecificOutput: {hookEventName: "UserPromptSubmit", sessionTitle: $t}}'
+  fi
+}
+
+# 标题前缀用的项目名：取工作目录的最后一段。目录名就是项目名，不向上找 git 仓库，
+# 也不读项目文件。根目录这种取不到名字的情况输出空串，调用方不加前缀。
+project_name() { # 目录路径
+  local path="${1:-}"
+  path="${path//$'\n'/}"
+  path="${path//$'\r'/}"
+  path="${path%/}"
+  path="${path##*/}"
+  printf '%s' "$path"
+}
+
+# 会话标题统一写成「项目名:标题」。手动改名判据比对的是完整标题，所以前缀必须
+# 和 pending、applied 一起存，回填时原样发出，不能在发出那一刻才拼。
+compose_title() { # 项目名 标题
+  if [ -n "${1:-}" ]; then
+    printf '%s:%s' "$1" "$2"
+  else
+    printf '%s' "$2"
   fi
 }
 

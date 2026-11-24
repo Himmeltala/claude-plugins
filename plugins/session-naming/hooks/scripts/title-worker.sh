@@ -20,6 +20,7 @@ export CLAUDE_SESSION_TITLE_WORKER=1
 
 session_id="${1:-}"
 transcript="${2:-}"
+project="${3:-}"
 [ -n "$session_id" ] && [ -f "$transcript" ] || exit 0
 
 state="$DATA_DIR/${session_id}.state"
@@ -52,6 +53,9 @@ raw=$(cd "$DATA_DIR" && "${runner[@]}" -p "$prompt" --no-session-persistence \
 
 title=$(printf '%s' "$raw" | python3 "$SCRIPT_DIR/clean-title.py" 2>/dev/null) || exit 0
 [ -n "$title" ] || exit 0
+
+# 存进去的就是最终标题，前缀一起算。钩子回填、手动改名判据都拿这同一个值比对。
+title=$(compose_title "$project" "$title")
 
 # 与当前标题相同就不写，免得每一轮都白改一次
 applied=$(state_get "$state" applied)
