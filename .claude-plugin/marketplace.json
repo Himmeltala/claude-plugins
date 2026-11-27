@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "himmeltala-claude-plugins",
-  "description": "本地团队插件市场。存放本单位自用约定（版本控制工作流、注释规范、中文表达规范），仓库托管在 GitHub 上。",
+  "description": "本地团队插件市场。存放本单位自用约定：版本控制、注释与文件头、中文写作、代码架构、会话标题。仓库托管在 GitHub 上。",
   "owner": {
     "name": "Himmeltala"
   },
@@ -53,6 +53,24 @@
         "style"
       ],
       "source": "./plugins/chinese-writing"
+    },
+    {
+      "name": "software-architecture",
+      "description": "代码架构规范：以降低认知负荷与变更成本为目标，管模块与组件边界、单向数据流、状态归属、组合与抽象时机、质量约束前置；前端部分按框架无关的通用判据写。",
+      "author": {
+        "name": "Himmeltala"
+      },
+      "category": "conventions",
+      "keywords": [
+        "architecture",
+        "frontend",
+        "boundaries",
+        "data-flow",
+        "state-management",
+        "refactoring",
+        "maintainability"
+      ],
+      "source": "./plugins/software-architecture"
     },
     {
       "name": "session-naming",

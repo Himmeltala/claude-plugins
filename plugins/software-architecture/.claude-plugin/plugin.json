@@ -1,0 +1,18 @@
+{
+  "name": "software-architecture",
+  "version": "0.1.0",
+  "description": "代码架构规范：以降低认知负荷与变更成本为目标，管模块与组件边界、单向数据流、状态归属、组合与抽象时机、质量约束前置；前端部分按框架无关的通用判据写。",
+  "author": {
+    "name": "Himmeltala"
+  },
+  "keywords": [
+    "architecture",
+    "frontend",
+    "boundaries",
+    "data-flow",
+    "state-management",
+    "refactoring",
+    "maintainability"
+  ],
+  "license": "UNLICENSED"
+}
